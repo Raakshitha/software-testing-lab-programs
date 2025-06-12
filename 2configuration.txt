@@ -1,0 +1,86 @@
+def view_versions():
+    if not version_registry:
+        print("No versions tracked yet.")
+    else:
+        print("\n--- Current Software Versions ---")
+        for software, version in version_registry.items():
+            print(f"{software}: {version}")
+
+def view_log():
+    print("\n--- Version History Log ---")
+    try:
+        with open(LOG_FILE, 'r') as log:
+            content = log.read()
+            print(content if content else "Log is empty.")
+    except FileNotFoundError:
+        print("No log file found yet.")
+
+def main():
+    while True:
+        print("\n--- Configuration Management Menu ---")
+        print("1. Add/Update Software Version")
+        print("2. View Current Versions")
+        print("3. View Version History Log")
+        print("4. Exit")
+        choice = input("Enter your choice (1–4): ").strip()
+
+        if choice == '1':
+            add_version()
+        elif choice == '2':
+            view_versions()
+        elif choice == '3':
+            view_log()
+        elif choice == '4':
+            print("Exiting Configuration Management System. Goodbye!")
+            break
+        else:
+            print("Invalid input. Please choose between 1 and 4.")
+
+if __name__ == "__main__":
+    main()
+
+
+OUTPUT:
+
+--- Configuration Management Menu ---
+1. Add/Update Software Version
+2. View Current Versions
+3. View Version History Log
+4. Exit
+Enter your choice (1–4): 1
+Enter software/module name: payment 
+Enter new version (e.g., v1.2.0): v1.2.0
+Enter description of update/modification: update
+✅ Version for 'payment' updated to 'v1.2.0' and logged.
+
+--- Configuration Management Menu ---
+1. Add/Update Software Version
+2. View Current Versions
+3. View Version History Log
+4. Exit
+Enter your choice (1–4): 2
+
+--- Current Software Versions ---
+payment: v1.2.0
+
+--- Configuration Management Menu ---
+1. Add/Update Software Version
+2. View Current Versions
+3. View Version History Log
+4. Exit
+Enter your choice (1–4): 3
+
+--- Version History Log ---
+2025-06-11 23:03:59 | payment updated to v2.0.1 | added support for the upi and buy files
+2025-06-11 23:04:27 | shopping updated to v1.2.0 | added the cart
+2025-06-12 10:14:09 | payment updated to v1.2.0 | update
+2025-06-12 10:28:15 | payment updated to v1.2.0 | update
+
+
+--- Configuration Management Menu ---
+1. Add/Update Software Version
+2. View Current Versions
+3. View Version History Log
+4. Exit
+Enter your choice (1–4): 4
+Exiting Configuration Management System. Goodbye!
